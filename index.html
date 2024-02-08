@@ -1,4 +1,4 @@
-<!-- VERSION 5 -->
+<!-- VERSION 6 -->
 <!DOCTYPE html>
 <html>
 
@@ -34,6 +34,11 @@
       border: 1px solid #ccc;
       padding: 10px; /* Adjust the padding as needed */
       z-index: 1;
+    }
+
+    /* Updated style for the title */
+    h2 {
+      margin-top: 10px; /* Adjust the margin as needed */
     }
   </style>
 </head>
@@ -125,7 +130,7 @@
       // Position the popup container between the player boxes and the lineup card
       var playerButtonRect = playerButton.getBoundingClientRect();
       popupContainer.style.left = playerButtonRect.left + "px";
-      popupContainer.style.top = playerButtonRect.bottom + "px";
+      popupContainer.style.top = playerButtonRect.bottom + 10 + "px"; /* Add space between player buttons and lineup card */
 
       document.body.appendChild(popupContainer);
 
