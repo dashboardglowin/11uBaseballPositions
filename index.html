@@ -1,4 +1,4 @@
-<!-- VERSION 12 -->
+<!-- VERSION 10 -->
 <!DOCTYPE html>
 <html>
 
@@ -18,41 +18,22 @@
 
     /* Style for player buttons */
     .player-button {
-      font-size: 14px;
-      background-color: #87CEEB; /* Light blue background for player buttons */
-      color: #fff; /* White text color for player buttons */
-      padding: 10px 20px; /* Add padding for a button-like appearance */
-      border: 2px solid #4682B4; /* Darker blue border for texture */
-      border-radius: 5px; /* Add rounded corners */
-      margin: 10px; /* Adjust margin as needed for spacing between buttons */
-      position: relative; /* Enable relative positioning for pop-ups */
+      width: 80px; /* Adjust the width as needed */
+      height: 40px; /* Adjust the height as needed */
+      margin: 5px; /* Adjust the margin as needed */
+    }
+
+    /* Style for filled positions */
+    .filled-position {
+      background-color: lightblue; /* Adjust the color as needed */
     }
 
     /* Style for position list */
-    #positionListContainer {
-      border: 2px solid #4682B4; /* Darker blue border for position list */
-      padding: 10px; /* Adjust padding as needed */
-      margin-top: 40px; /* Adjust margin as needed */
-      margin-bottom: 40px; /* Adjust margin as needed */
-      font-size: 16px; /* Adjust font size as needed */
-      display: inline-block; /* Align the position list with the buttons */
-      position: relative; /* Enable relative positioning for pop-ups */
-    }
-
-    /* Style for the title */
-    h2 {
-      margin-top: 0; /* Adjust margin to remove default spacing */
-    }
-
-    /* Style for the reset button */
-    #resetButton {
-      font-size: 14px;
-      background-color: #87CEEB; /* Light blue background for reset button */
-      color: #fff; /* White text color for reset button */
-      padding: 10px 20px; /* Add padding for a button-like appearance */
-      border: 2px solid #4682B4; /* Darker blue border for texture */
-      border-radius: 5px; /* Add rounded corners */
-      margin-top: 10px; /* Adjust margin as needed for spacing */
+    #positionList {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px; /* Adjust the margin as needed */
+      font-size: 16px; /* Adjust the font size as needed */
     }
   </style>
 </head>
@@ -76,11 +57,8 @@
         createPlayerButton(playerNames[i]);
       }
 
-      // Create position list and title
+      // Create position list
       createPositionList();
-
-      // Add reset button under the lineup card
-      createResetButton();
     }
 
     // Function to create a player button
@@ -94,19 +72,11 @@
       document.body.appendChild(button);
     }
 
-    // Function to create the position list and title
+    // Function to create the position list
     function createPositionList() {
-      var title = document.createElement("h2");
-      title.innerHTML = "Defensive Lineup Card";
-      document.body.appendChild(title);
-
-      var listContainer = document.createElement("div");
-      listContainer.id = "positionListContainer";
-      document.body.appendChild(listContainer);
-
       var list = document.createElement("ul");
       list.id = "positionList";
-      listContainer.appendChild(list);
+      document.body.appendChild(list);
 
       // Populate the initial position list
       for (var i = 0; i < positions.length; i++) {
@@ -116,35 +86,22 @@
       }
     }
 
-    // Function to create the reset button
-    function createResetButton() {
-      var resetButton = document.createElement("button");
-      resetButton.innerHTML = "Reset Lineup";
-      resetButton.id = "resetButton";
-      resetButton.onclick = resetLineup;
-      document.body.appendChild(resetButton);
-    }
-
     // Function to show the position assignment popup
     function showPositionPopup(playerName, playerButton) {
-      // Close any existing popups
-      closePositionPopups();
-
       // Check if the player button has been used
       if (usedPlayerButtons.includes(playerButton)) {
         return;
       }
 
-      // Create a container for the popup choices
-      var popupContainer = document.createElement("div");
-      popupContainer.id = "popupContainer";
+      var popup = document.createElement("div");
+      popup.innerHTML = "Select position for " + playerName + ": ";
 
       for (var i = 0; i < positions.length; i++) {
         var positionButton = document.createElement("button");
         positionButton.innerHTML = positions[i];
         positionButton.onclick = function () {
           assignPosition(playerName, this.innerHTML, playerButton);
-          document.body.removeChild(popupContainer);
+          document.body.removeChild(popup);
         };
 
         // Check if position is filled and disable button
@@ -153,29 +110,13 @@
           positionButton.disabled = true;
         }
 
-        popupContainer.appendChild(positionButton);
+        popup.appendChild(positionButton);
       }
 
-      // Position the popup container right under the player button
-      var playerButtonRect = playerButton.getBoundingClientRect();
-      popupContainer.style.left = playerButtonRect.left + "px";
-      popupContainer.style.top = playerButtonRect.bottom + 10 + "px"; /* Adjust space between player buttons and lineup card */
-
-      document.body.appendChild(popupContainer);
+      document.body.appendChild(popup);
 
       // Mark the player button as used
       usedPlayerButtons.push(playerButton);
-    }
-
-    // Function to close all position assignment popups
-    function closePositionPopups() {
-      var popups = document.querySelectorAll("div[id^='popupContainer']");
-      popups.forEach(function (popup) {
-        document.body.removeChild(popup);
-      });
-
-      // Clear the used player buttons array
-      usedPlayerButtons = [];
     }
 
     // Function to assign a position to a player
