@@ -1,0 +1,164 @@
+<!-- VERSION 4 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Baseball Lineup</title>
+  <style>
+    /* Add your CSS styles here if needed */
+
+    /* New style for player buttons */
+    .player-button {
+      width: 80px; /* Adjust the width as needed */
+      height: 40px; /* Adjust the height as needed */
+      margin: 5px;  /* Adjust the margin as needed */
+    }
+
+    /* New style for filled positions */
+    .filled-position {
+      background-color: lightblue; /* Adjust the color as needed */
+    }
+
+    /* New style for position list */
+    #positionList {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px; /* Adjust the margin as needed */
+      font-size: 16px; /* Adjust the font size as needed */
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // Define player names and positions
+    var playerNames = ["Matthew", "Benjamin", "Jacob", "Andrew", "Luke", "Lucas R", "Tyler", "Lucas H", "Ryan", "David", "Vincent"];
+    var positions = ["Pitcher", "Catcher", "1st Base", "2nd Base", "3rd Base", "Shortstop", "Left Field", "Center Field", "Right Field", "Bench 1", "Bench 2"];
+
+    // Array to track filled positions
+    var filledPositions = [];
+
+    // Array to track used player buttons
+    var usedPlayerButtons = [];
+
+    // Function to create buttons and position list
+    function createLineup() {
+      // Create buttons for each player
+      for (var i = 0; i < playerNames.length; i++) {
+        createPlayerButton(playerNames[i]);
+      }
+
+      // Create position list
+      createPositionList();
+    }
+
+    // Function to create a player button
+    function createPlayerButton(playerName) {
+      var button = document.createElement("button");
+      button.innerHTML = playerName;
+      button.classList.add("player-button");
+      button.onclick = function () {
+        showPositionPopup(playerName, button);
+      };
+      document.body.appendChild(button);
+    }
+
+    // Function to create the position list
+    function createPositionList() {
+      var list = document.createElement("ul");
+      list.id = "positionList";
+      document.body.appendChild(list);
+
+      // Populate the initial position list
+      for (var i = 0; i < positions.length; i++) {
+        var listItem = document.createElement("li");
+        listItem.innerHTML = positions[i] + ": ";
+        list.appendChild(listItem);
+      }
+    }
+
+    // Function to show the position assignment popup
+    function showPositionPopup(playerName, playerButton) {
+      // Close any existing popups
+      closePositionPopups();
+
+      // Check if the player button has been used
+      if (usedPlayerButtons.includes(playerButton)) {
+        return;
+      }
+
+      var popup = document.createElement("div");
+      popup.id = "positionPopup_" + playerName; // Unique ID for each popup
+      popup.innerHTML = "Select position for " + playerName + ": ";
+
+      for (var i = 0; i < positions.length; i++) {
+        var positionButton = document.createElement("button");
+        positionButton.innerHTML = positions[i];
+        positionButton.onclick = function () {
+          assignPosition(playerName, this.innerHTML, playerButton);
+          document.body.removeChild(popup);
+        };
+
+        // Check if position is filled and disable button
+        if (filledPositions.includes(positions[i])) {
+          positionButton.classList.add("filled-position");
+          positionButton.disabled = true;
+        }
+
+        popup.appendChild(positionButton);
+      }
+
+      document.body.appendChild(popup);
+
+      // Mark the player button as used
+      usedPlayerButtons.push(playerButton);
+    }
+
+    // Function to close all position assignment popups
+    function closePositionPopups() {
+      var popups = document.querySelectorAll("div[id^='positionPopup']");
+      popups.forEach(function (popup) {
+        document.body.removeChild(popup);
+      });
+
+      // Clear the used player buttons array
+      usedPlayerButtons = [];
+    }
+
+    // Function to assign a position to a player
+    function assignPosition(playerName, position, playerButton) {
+      var positionList = document.getElementById("positionList");
+      var positionItems = positionList.getElementsByTagName("li");
+
+      for (var i = 0; i < positionItems.length; i++) {
+        if (positionItems[i].innerHTML.includes(position)) {
+          positionItems[i].innerHTML = positions[i] + ": " + playerName + " ";
+
+          // Add filled position to the array
+          filledPositions.push(positions[i]);
+        }
+      }
+
+      // Change style of the player button
+      playerButton.classList.add("filled-position");
+      playerButton.disabled = true;
+    }
+
+    // Function to reset the lineup
+    function resetLineup() {
+      var positionList = document.getElementById("positionList");
+      positionList.innerHTML = "";
+
+      // Clear arrays
+      filledPositions = [];
+      usedPlayerButtons = [];
+
+      createPositionList();
+    }
+
+    // Create the lineup when the page loads
+    window.onload = createLineup;
+  </script>
+</body>
+
+</html>
