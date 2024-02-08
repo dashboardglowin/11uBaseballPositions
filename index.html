@@ -7,33 +7,48 @@
   <style>
     /* Add your CSS styles here if needed */
 
-    /* Use DM Sans font */
-    body {
-      font-family: "DM Sans", sans-serif;
-      font-size: 16px;
-      color: #333;
-      background-color: #fff; /* White background */
-      text-align: center; /* Center the elements */
-    }
-
-    /* Style for player buttons */
+    /* New style for player buttons */
     .player-button {
       width: 80px; /* Adjust the width as needed */
       height: 40px; /* Adjust the height as needed */
-      margin: 5px; /* Adjust the margin as needed */
+      margin: 10px;  /* Adjust the margin as needed */
     }
 
-    /* Style for filled positions */
+    /* New style for filled positions */
     .filled-position {
       background-color: lightblue; /* Adjust the color as needed */
     }
 
-    /* Style for position list */
+    /* Updated style for position list */
     #positionList {
       border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px; /* Adjust the margin as needed */
+      padding: 5px; /* Adjust the padding as needed */
+      margin-top: 25px; /* Adjust the margin as needed */
+      margin-bottom: 25px; /* Adjust the margin as needed */
       font-size: 16px; /* Adjust the font size as needed */
+      list-style: none; /* Remove bullet points */
+      padding-left: 3px; /* Adjust the left padding for position names */
+    }
+
+    /* Updated style for popup container */
+    #popupContainer {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px; /* Adjust the padding as needed */
+      z-index: 1;
+    }
+
+    /* Updated style for the title */
+    h2 {
+      margin-top: 30px; /* Adjust the margin as needed */
+    }
+
+    /* Updated style for the Defensive Lineup Card */
+    #lineupCard {
+      border: 1px solid #ccc;
+      padding: 10px; /* Adjust the padding as needed */
+      max-width: 200px; /* Adjust the maximum width as needed */
     }
   </style>
 </head>
@@ -74,6 +89,11 @@
 
     // Function to create the position list
     function createPositionList() {
+      // Create a title for the Defensive Lineup Card
+      var title = document.createElement("h2");
+      title.innerHTML = "Defensive Lineup Card";
+      document.body.appendChild(title);
+
       var list = document.createElement("ul");
       list.id = "positionList";
       document.body.appendChild(list);
@@ -88,20 +108,24 @@
 
     // Function to show the position assignment popup
     function showPositionPopup(playerName, playerButton) {
+      // Close any existing popups
+      closePositionPopups();
+
       // Check if the player button has been used
       if (usedPlayerButtons.includes(playerButton)) {
         return;
       }
 
-      var popup = document.createElement("div");
-      popup.innerHTML = "Select position for " + playerName + ": ";
+      // Create a container for the popup choices
+      var popupContainer = document.createElement("div");
+      popupContainer.id = "popupContainer";
 
       for (var i = 0; i < positions.length; i++) {
         var positionButton = document.createElement("button");
         positionButton.innerHTML = positions[i];
         positionButton.onclick = function () {
           assignPosition(playerName, this.innerHTML, playerButton);
-          document.body.removeChild(popup);
+          document.body.removeChild(popupContainer);
         };
 
         // Check if position is filled and disable button
@@ -110,13 +134,29 @@
           positionButton.disabled = true;
         }
 
-        popup.appendChild(positionButton);
+        popupContainer.appendChild(positionButton);
       }
 
-      document.body.appendChild(popup);
+      // Position the popup container between the player boxes and the lineup card
+      var playerButtonRect = playerButton.getBoundingClientRect();
+      popupContainer.style.left = playerButtonRect.left + "px";
+      popupContainer.style.top = playerButtonRect.bottom + 20 + "px"; /* Add space between player buttons and lineup card */
+
+      document.body.appendChild(popupContainer);
 
       // Mark the player button as used
       usedPlayerButtons.push(playerButton);
+    }
+
+    // Function to close all position assignment popups
+    function closePositionPopups() {
+      var popups = document.querySelectorAll("div[id^='popupContainer']");
+      popups.forEach(function (popup) {
+        document.body.removeChild(popup);
+      });
+
+      // Clear the used player buttons array
+      usedPlayerButtons = [];
     }
 
     // Function to assign a position to a player
