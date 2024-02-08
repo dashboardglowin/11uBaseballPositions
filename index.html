@@ -1,4 +1,4 @@
-<!-- VERSION 12 -->
+<!-- VERSION 13 -->
 <!DOCTYPE html>
 <html>
 
@@ -51,12 +51,16 @@
       max-width: 200px; /* Adjust the maximum width as needed */
     }
 
+    /* New style for the baseball diamond container */
+    #baseballDiamondContainer {
+      position: relative;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
     /* New style for the baseball diamond */
     #baseballDiamond {
       font-family: monospace; /* Use monospace font for better alignment */
       white-space: pre; /* Preserve whitespaces for better formatting */
-      margin-top: 20px; /* Adjust the margin as needed */
-      position: relative;
     }
 
     /* New style for player names on the baseball diamond */
@@ -121,6 +125,64 @@
         listItem.innerHTML = positions[i] + ": ";
         list.appendChild(listItem);
       }
+
+      // Create the baseball diamond container
+      var baseballDiamondContainer = document.createElement("div");
+      baseballDiamondContainer.id = "baseballDiamondContainer";
+      document.body.appendChild(baseballDiamondContainer);
+
+      // Create the baseball diamond
+      var baseballDiamond = document.createElement("div");
+      baseballDiamond.id = "baseballDiamond";
+      baseballDiamond.innerHTML = `
+        <pre>
+           _______3_______
+          /             \
+         /               \
+        1________________2
+        |               |
+        |      P        |
+        |      /        |
+        |   __|__       |
+        |  /     \      |
+        | /_______\     |
+        |               |
+        |               |
+        |      SS       |
+        |      / \      |
+        |     /   \     |
+        |   _|___|_     |
+        |  /       \    |
+        | /         \   |
+        |/___________\  |
+        |               |
+        |    2B         |
+        |    / \        |
+        |   /   \       |
+        |  /_____\      |
+        |               |
+        |               |
+        |   _______     |
+        |  /       \    |
+        | /         \   |
+        |/___________\  |
+        |               |
+        |   Bench 1     |
+        |     __        |
+        |    /  \       |
+        |   /____\      |
+        |               |
+        |   Bench 2     |
+        |    ___        |
+        |   /   \       |
+        |  /     \      |
+        | /_______\     |
+        \               /
+         \             /
+          \___________/
+        </pre>
+      `;
+      baseballDiamondContainer.appendChild(baseballDiamond);
     }
 
     // Function to show the position assignment popup
@@ -217,69 +279,53 @@
         // Position the player name based on the position on the diamond
         switch (player.position) {
           case "Pitcher":
-            playerElement.style.left = "50%";
-            playerElement.style.top = "70%";
+            playerElement.style.left = "45%";
+            playerElement.style.top = "72%";
             break;
           case "Catcher":
             playerElement.style.left = "50%";
-            playerElement.style.top = "95%";
+            playerElement.style.top = "94%";
             break;
           case "1st Base":
-            playerElement.style.left = "70%";
-            playerElement.style.top = "75%";
+            playerElement.style.left = "58%";
+            playerElement.style.top = "55%";
             break;
           case "2nd Base":
-            playerElement.style.left = "30%";
-            playerElement.style.top = "60%";
+            playerElement.style.left = "50%";
+            playerElement.style.top = "40%";
             break;
           case "3rd Base":
-            playerElement.style.left = "70%";
+            playerElement.style.left = "42%";
             playerElement.style.top = "55%";
             break;
           case "Shortstop":
-            playerElement.style.left = "30%";
-            playerElement.style.top = "65%";
+            playerElement.style.left = "50%";
+            playerElement.style.top = "40%";
             break;
           case "Left Field":
-            playerElement.style.left = "25%";
-            playerElement.style.top = "40%";
+            playerElement.style.left = "30%";
+            playerElement.style.top = "28%";
             break;
           case "Center Field":
             playerElement.style.left = "50%";
-            playerElement.style.top = "30%";
+            playerElement.style.top = "16%";
             break;
           case "Right Field":
-            playerElement.style.left = "75%";
-            playerElement.style.top = "40%";
+            playerElement.style.left = "70%";
+            playerElement.style.top = "28%";
             break;
           case "Bench 1":
-            playerElement.style.left = "85%";
-            playerElement.style.top = "50%";
+            playerElement.style.left = "38%";
+            playerElement.style.top = "80%";
             break;
           case "Bench 2":
-            playerElement.style.left = "85%";
-            playerElement.style.top = "55%";
-            break;
-          default:
+            playerElement.style.left = "60%";
+            playerElement.style.top = "80%";
             break;
         }
 
-        document.body.appendChild(playerElement);
+        document.getElementById("baseballDiamondContainer").appendChild(playerElement);
       });
-    }
-
-    // Function to reset the lineup
-    function resetLineup() {
-      var positionList = document.getElementById("positionList");
-      positionList.innerHTML = "";
-
-      // Clear arrays
-      filledPositions = [];
-      usedPlayerButtons = [];
-      selectedPlayers = [];
-
-      createPositionList();
-      displaySelectedPlayers();
     }
 
     // Create the lineup when the page loads
