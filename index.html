@@ -1,4 +1,4 @@
-<!-- VERSION 11 -->
+<!-- VERSION 10 -->
 <!DOCTYPE html>
 <html>
 
@@ -50,17 +50,6 @@
       padding: 10px; /* Adjust the padding as needed */
       max-width: 200px; /* Adjust the maximum width as needed */
     }
-
-    /* New style for the clear form button */
-    #clearFormButton {
-      font-size: 14px;
-      background-color: #87CEEB; /* Light blue background for the button */
-      color: #fff; /* White text color for the button */
-      padding: 10px 20px; /* Add padding for a button-like appearance */
-      border: 2px solid #4682B4; /* Darker blue border for texture */
-      border-radius: 5px; /* Add rounded corners */
-      margin-top: 20px; /* Adjust margin as needed for spacing */
-    }
   </style>
 </head>
 
@@ -85,12 +74,6 @@
 
       // Create position list
       createPositionList();
-
-      // Add reset button under the lineup card
-      createResetButton();
-
-      // Add clear form button at the end
-      createClearFormButton();
     }
 
     // Function to create a player button
@@ -104,7 +87,7 @@
       document.body.appendChild(button);
     }
 
-    // Function to create the position list and title
+    // Function to create the position list
     function createPositionList() {
       // Create a title for the Defensive Lineup Card
       var title = document.createElement("h2");
@@ -121,24 +104,6 @@
         listItem.innerHTML = positions[i] + ": ";
         list.appendChild(listItem);
       }
-    }
-
-    // Function to create the reset button
-    function createResetButton() {
-      var resetButton = document.createElement("button");
-      resetButton.innerHTML = "Reset Lineup";
-      resetButton.id = "resetButton";
-      resetButton.onclick = resetLineup;
-      document.body.appendChild(resetButton);
-    }
-
-    // Function to create the clear form button
-    function createClearFormButton() {
-      var clearFormButton = document.createElement("button");
-      clearFormButton.innerHTML = "Clear Form";
-      clearFormButton.id = "clearFormButton";
-      clearFormButton.onclick = clearForm;
-      document.body.appendChild(clearFormButton);
     }
 
     // Function to show the position assignment popup
@@ -222,20 +187,6 @@
       filledPositions = [];
       usedPlayerButtons = [];
 
-      createPositionList();
-    }
-
-    // Function to clear the form
-    function clearForm() {
-      // Clear position list
-      var positionList = document.getElementById("positionList");
-      positionList.innerHTML = "";
-
-      // Clear arrays
-      filledPositions = [];
-      usedPlayerButtons = [];
-
-      // Create position list again
       createPositionList();
     }
 
