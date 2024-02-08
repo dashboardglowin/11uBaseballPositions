@@ -1,4 +1,4 @@
-<!-- VERSION 11 -->
+<!-- VERSION 12 -->
 <!DOCTYPE html>
 <html>
 
@@ -25,24 +25,23 @@
       border: 2px solid #4682B4; /* Darker blue border for texture */
       border-radius: 5px; /* Add rounded corners */
       margin: 10px; /* Adjust margin as needed for spacing between buttons */
+      position: relative; /* Enable relative positioning for pop-ups */
     }
 
     /* Style for position list */
-    #positionList {
+    #positionListContainer {
       border: 2px solid #4682B4; /* Darker blue border for position list */
       padding: 10px; /* Adjust padding as needed */
       margin-top: 40px; /* Adjust margin as needed */
       margin-bottom: 40px; /* Adjust margin as needed */
       font-size: 16px; /* Adjust font size as needed */
-      list-style: none; /* Remove bullet points */
-      padding-left: 3px; /* Adjust left padding for position names */
-      text-align: left; /* Align text to the left */
       display: inline-block; /* Align the position list with the buttons */
+      position: relative; /* Enable relative positioning for pop-ups */
     }
 
     /* Style for the title */
     h2 {
-      margin-top: 30px; /* Adjust margin as needed for the title */
+      margin-top: 0; /* Adjust margin to remove default spacing */
     }
 
     /* Style for the reset button */
@@ -77,10 +76,10 @@
         createPlayerButton(playerNames[i]);
       }
 
-      // Create position list
+      // Create position list and title
       createPositionList();
 
-      // Add reset button after Vincent's box
+      // Add reset button under the lineup card
       createResetButton();
     }
 
@@ -95,16 +94,19 @@
       document.body.appendChild(button);
     }
 
-    // Function to create the position list
+    // Function to create the position list and title
     function createPositionList() {
-      // Create a title for the Defensive Lineup Card
       var title = document.createElement("h2");
       title.innerHTML = "Defensive Lineup Card";
       document.body.appendChild(title);
 
+      var listContainer = document.createElement("div");
+      listContainer.id = "positionListContainer";
+      document.body.appendChild(listContainer);
+
       var list = document.createElement("ul");
       list.id = "positionList";
-      document.body.appendChild(list);
+      listContainer.appendChild(list);
 
       // Populate the initial position list
       for (var i = 0; i < positions.length; i++) {
@@ -154,10 +156,10 @@
         popupContainer.appendChild(positionButton);
       }
 
-      // Position the popup container between the player boxes and the lineup card
+      // Position the popup container right under the player button
       var playerButtonRect = playerButton.getBoundingClientRect();
       popupContainer.style.left = playerButtonRect.left + "px";
-      popupContainer.style.top = playerButtonRect.bottom + 20 + "px"; /* Add space between player buttons and lineup card */
+      popupContainer.style.top = playerButtonRect.bottom + 10 + "px"; /* Adjust space between player buttons and lineup card */
 
       document.body.appendChild(popupContainer);
 
