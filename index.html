@@ -1,4 +1,4 @@
-<!-- VERSION 4 -->
+<!-- VERSION 5 -->
 <!DOCTYPE html>
 <html>
 
@@ -19,12 +19,21 @@
       background-color: lightblue; /* Adjust the color as needed */
     }
 
-    /* New style for position list */
+    /* Updated style for position list */
     #positionList {
       border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px; /* Adjust the margin as needed */
+      padding: 5px; /* Adjust the padding as needed */
+      margin-top: 10px; /* Adjust the margin as needed */
       font-size: 16px; /* Adjust the font size as needed */
+    }
+
+    /* Updated style for popup container */
+    #popupContainer {
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px; /* Adjust the padding as needed */
+      z-index: 1;
     }
   </style>
 </head>
@@ -65,6 +74,11 @@
 
     // Function to create the position list
     function createPositionList() {
+      // Create a title for the Defensive Lineup Card
+      var title = document.createElement("h2");
+      title.innerHTML = "Defensive Lineup Card";
+      document.body.appendChild(title);
+
       var list = document.createElement("ul");
       list.id = "positionList";
       document.body.appendChild(list);
@@ -87,16 +101,16 @@
         return;
       }
 
-      var popup = document.createElement("div");
-      popup.id = "positionPopup_" + playerName; // Unique ID for each popup
-      popup.innerHTML = "Select position for " + playerName + ": ";
+      // Create a container for the popup choices
+      var popupContainer = document.createElement("div");
+      popupContainer.id = "popupContainer";
 
       for (var i = 0; i < positions.length; i++) {
         var positionButton = document.createElement("button");
         positionButton.innerHTML = positions[i];
         positionButton.onclick = function () {
           assignPosition(playerName, this.innerHTML, playerButton);
-          document.body.removeChild(popup);
+          document.body.removeChild(popupContainer);
         };
 
         // Check if position is filled and disable button
@@ -105,10 +119,15 @@
           positionButton.disabled = true;
         }
 
-        popup.appendChild(positionButton);
+        popupContainer.appendChild(positionButton);
       }
 
-      document.body.appendChild(popup);
+      // Position the popup container between the player boxes and the lineup card
+      var playerButtonRect = playerButton.getBoundingClientRect();
+      popupContainer.style.left = playerButtonRect.left + "px";
+      popupContainer.style.top = playerButtonRect.bottom + "px";
+
+      document.body.appendChild(popupContainer);
 
       // Mark the player button as used
       usedPlayerButtons.push(playerButton);
@@ -116,7 +135,7 @@
 
     // Function to close all position assignment popups
     function closePositionPopups() {
-      var popups = document.querySelectorAll("div[id^='positionPopup']");
+      var popups = document.querySelectorAll("div[id^='popupContainer']");
       popups.forEach(function (popup) {
         document.body.removeChild(popup);
       });
