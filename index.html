@@ -1,4 +1,4 @@
-<!-- VERSION 15 -->
+<!-- VERSION 16 -->
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +28,6 @@
       font-size: 16px; /* Adjust the font size as needed */
       list-style: none; /* Remove bullet points */
       padding-left: 3px; /* Adjust the left padding for position names */
-      font-weight: bold; /* Make position names bold */
     }
 
     /* Updated style for popup container */
@@ -64,6 +63,10 @@
     .player-name {
       position: absolute;
       color: #333; /* Adjust the color as needed */
+    }
+
+    /* New style for bold player names on the baseball diamond */
+    .bold-player-name {
       font-weight: bold; /* Make player names bold */
     }
   </style>
@@ -188,7 +191,7 @@
 
       for (var i = 0; i < positionItems.length; i++) {
         if (positionItems[i].innerHTML.includes(position)) {
-          positionItems[i].innerHTML = positions[i] + ": " + playerName + " ";
+          positionItems[i].innerHTML = positions[i] + ": ";
 
           // Add filled position to the array
           filledPositions.push(positions[i]);
@@ -279,8 +282,7 @@
       positions.forEach(function (position) {
         var positionElement = document.createElement("div");
         positionElement.innerHTML = position;
-        positionElement.classList.add("player-name");
-
+        positionElement.classList.add("player-name", "bold-player-name"); // Make position names bold
         // Position the position name based on the position on the diamond
         switch (position) {
           case "Pitcher":
@@ -347,6 +349,7 @@
 
       createPositionList();
       displaySelectedPlayers();
+      displayInitialPositions();
     }
 
     // Create the lineup when the page loads
