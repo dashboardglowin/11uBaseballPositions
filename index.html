@@ -55,13 +55,13 @@
 /* Updated style for the baseball diamond container */
 #diamondContainer {
   font-family: 'Arial', sans-serif; /* Use Arial font or fallback to sans-serif if Arial is not available */
-  font-size: 18px; /* Adjust the font size as needed */
+  font-size: 16px; /* Adjust the font size as needed */
   font-weight: bold; /* Make the text bold */
   white-space: pre;
   margin-top: 20px;
   position: relative;
   border: 2px solid #ccc; /* Add border for better visibility */
-  background-image: url('https://i.imgur.com/ERVBsU3.png'); /* Replace 'YourImageFilename.jpg' with the actual filename from the URL */
+  background-image: url('https://i.imgur.com/GSTnodZ.png'); /* Replace 'YourImageFilename.jpg' with the actual filename from the URL */
   background-size: contain; /* Scale the background image to fit the container while maintaining its aspect ratio */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
   padding: 10px; /* Add padding for better appearance */
@@ -236,9 +236,9 @@ function createDiamondContainer() {
         playerElement.innerHTML = player.playerName;
         playerElement.classList.add("player-name");
 
-        // Calculate position percentages based on diamondContainer dimensions
-        var containerWidth = diamondContainer.offsetWidth;
-        var containerHeight = diamondContainer.offsetHeight;
+// Center the text horizontally within each position
+playerElement.style.left = "50%";
+playerElement.style.transform = "translateX(-50%)";
 
         switch (player.position) {
           case "Pitcher":
