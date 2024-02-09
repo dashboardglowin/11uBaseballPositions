@@ -45,6 +45,7 @@
 
     /* Updated style for the Defensive Lineup Card */
     #lineupCard {
+      display: inline-block; /* Display lineup card and diamond container inline */
       border: 1px solid #ccc;
       padding: 10px; /* Adjust the padding as needed */
       max-width: 200px; /* Adjust the maximum width as needed */
@@ -52,13 +53,14 @@
 
     /* New style for the baseball diamond container */
     #diamondContainer {
+      display: inline-block; /* Display lineup card and diamond container inline */
       font-family: monospace; /* Use monospace font for better alignment */
       white-space: pre; /* Preserve whitespaces for better formatting */
       margin-top: 20px; /* Adjust the margin as needed */
       position: relative;
-      width: 70%; /* Adjust the width as needed */
-      height: 70vh; /* Adjust the height as needed */
-      max-width: 2000px; /* Set a maximum width if needed */
+      width: 70%;
+      height: 70vh;
+      max-width: 600px; /* Adjust the maximum width as needed */
     }
 
     /* New style for player names on the baseball diamond */
@@ -128,11 +130,13 @@
       }
     }
 
-    // Function to create the diamond container
-    function createDiamondContainer() {
-      var diamondContainer = document.createElement("div");
-      diamondContainer.id = "diamondContainer";
+// Function to create the diamond container
+function createDiamondContainer() {
+  var diamondContainer = document.createElement("div");
+  diamondContainer.id = "diamondContainer";
 
+  // Adjust the height of the container as needed (in pixels)
+  diamondContainer.style.height = "400px"; // Change this value to your desired height
       document.body.appendChild(diamondContainer);
     }
 
@@ -194,7 +198,7 @@
       var positionList = document.getElementById("positionList");
       var positionItems = positionList.getElementsByTagName("li");
 
-      for (var i = 0; positionItems[i]; i++) {
+      for (var i = 0; i < positionItems.length; i++) {
         if (positionItems[i].innerHTML.includes(position)) {
           positionItems[i].innerHTML = positions[i] + ": " + playerName + " ";
 
