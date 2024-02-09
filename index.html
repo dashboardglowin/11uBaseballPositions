@@ -1,4 +1,4 @@
-<!-- VERSION 14 -->
+<!-- VERSION 15 -->
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +28,7 @@
       font-size: 16px; /* Adjust the font size as needed */
       list-style: none; /* Remove bullet points */
       padding-left: 3px; /* Adjust the left padding for position names */
+      font-weight: bold; /* Make position names bold */
     }
 
     /* Updated style for popup container */
@@ -63,6 +64,7 @@
     .player-name {
       position: absolute;
       color: #333; /* Adjust the color as needed */
+      font-weight: bold; /* Make player names bold */
     }
   </style>
 </head>
@@ -91,6 +93,9 @@
 
       // Create position list
       createPositionList();
+
+      // Display initial positions on the baseball diamond
+      displayInitialPositions();
     }
 
     // Function to create a player button
@@ -265,6 +270,68 @@
         }
 
         document.body.appendChild(playerElement);
+      });
+    }
+
+    // Function to display initial positions on the baseball diamond
+    function displayInitialPositions() {
+      // Add initial positions to the baseball diamond
+      positions.forEach(function (position) {
+        var positionElement = document.createElement("div");
+        positionElement.innerHTML = position;
+        positionElement.classList.add("player-name");
+
+        // Position the position name based on the position on the diamond
+        switch (position) {
+          case "Pitcher":
+            positionElement.style.left = "50%";
+            positionElement.style.top = "70%";
+            break;
+          case "Catcher":
+            positionElement.style.left = "50%";
+            positionElement.style.top = "95%";
+            break;
+          case "1st Base":
+            positionElement.style.left = "70%";
+            positionElement.style.top = "70%";
+            break;
+          case "2nd Base":
+            positionElement.style.left = "60%";
+            positionElement.style.top = "60%";
+            break;
+          case "3rd Base":
+            positionElement.style.left = "30%";
+            positionElement.style.top = "70%";
+            break;
+          case "Shortstop":
+            positionElement.style.left = "40%";
+            positionElement.style.top = "60%";
+            break;
+          case "Left Field":
+            positionElement.style.left = "25%";
+            positionElement.style.top = "45%";
+            break;
+          case "Center Field":
+            positionElement.style.left = "50%";
+            positionElement.style.top = "35%";
+            break;
+          case "Right Field":
+            positionElement.style.left = "75%";
+            positionElement.style.top = "45%";
+            break;
+          case "Bench 1":
+            positionElement.style.left = "85%";
+            positionElement.style.top = "90%";
+            break;
+          case "Bench 2":
+            positionElement.style.left = "85%";
+            positionElement.style.top = "95%";
+            break;
+          default:
+            break;
+        }
+
+        document.body.appendChild(positionElement);
       });
     }
 
