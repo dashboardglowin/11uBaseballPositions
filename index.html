@@ -26,7 +26,7 @@
       margin-bottom: 25px; /* Adjust the margin as needed */
       font-size: 20px; /* Adjust the font size as needed */
       list-style: none; /* Remove bullet points */
-      max-width: 510px; /* Retain the maximum width as needed */
+      max-width: 500px; /* Retain the maximum width as needed */
       padding-left: 3px; /* Adjust the left padding for position names */
     }
 
@@ -63,7 +63,7 @@
   background-size: contain; /* Scale the background image to fit the container while maintaining its aspect ratio */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
   padding: 10px; /* Add padding for better appearance */
-  max-width: 500px; /* Retain the maximum width as needed */
+  max-width: 480px; /* Retain the maximum width as needed */
   height: 70vh; /* Retain the specified height */
 }
 
@@ -231,7 +231,7 @@ function createDiamondContainer() {
       // Add player names to the baseball diamond within diamondContainer
       selectedPlayers.forEach(function (player) {
         var playerElement = document.createElement("div");
-        playerElement.innerHTML = player.playerName + "<br>" + player.position;
+        playerElement.innerHTML = player.playerName;
         playerElement.classList.add("player-name");
 
         // Calculate position percentages based on diamondContainer dimensions
