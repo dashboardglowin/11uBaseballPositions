@@ -232,57 +232,63 @@ function createDiamondContainer() {
       diamondContainer.innerHTML = "";
 
       // Add player names to the baseball diamond within diamondContainer
-  selectedPlayers.forEach(function (player) {
-    var playerElement = document.createElement("div");
-    playerElement.innerHTML = player.playerName;
-    playerElement.classList.add("player-name");
+      selectedPlayers.forEach(function (player) {
+        var playerElement = document.createElement("div");
+        playerElement.innerHTML = player.playerName;
+        playerElement.classList.add("player-name");
 
-    // Center the text horizontally within each position
-    playerElement.style.left = "50%";
-    playerElement.style.transform = "translateX(-50%)";
+        // Calculate position percentages based on diamondContainer dimensions
+        var containerWidth = diamondContainer.offsetWidth;
+        var containerHeight = diamondContainer.offsetHeight;
 
-    // Set top positions based on player.position (adjust as needed)
-    switch (player.position) {
-      case "Pitcher":
-        playerElement.style.top = containerHeight * 0.55 + "px";
-        break;
-      case "Catcher":
-        playerElement.style.top = containerHeight * 0.8 + "px";
-        break;
-      case "1st Base":
-        playerElement.style.top = containerHeight * 0.55 + "px";
-        break;
-      case "2nd Base":
-        playerElement.style.top = containerHeight * 0.35 + "px";
-        break;
-      case "3rd Base":
-        playerElement.style.top = containerHeight * 0.55 + "px";
-        break;
-      case "Shortstop":
-        playerElement.style.top = containerHeight * 0.35 + "px";
-        break;
-      case "Left Field":
-        playerElement.style.top = containerHeight * 0.25 + "px";
-        break;
-      case "Center Field":
-        playerElement.style.top = containerHeight * 0.2 + "px";
-        break;
-      case "Right Field":
-        playerElement.style.top = containerHeight * 0.25 + "px";
-        break;
-      case "Bench 1":
-        playerElement.style.top = containerHeight * 0.7 + "px";
-        break;
-      case "Bench 2":
-        playerElement.style.top = containerHeight * 0.75 + "px";
-        break;
-      default:
-        break;
-    }
-
-    diamondContainer.appendChild(playerElement);
-  });
-}
+        switch (player.position) {
+          case "Pitcher":
+            playerElement.style.left = containerWidth * 0.44 + "px";
+            playerElement.style.top = containerHeight * 0.55 + "px";
+            break;
+          case "Catcher":
+            playerElement.style.left = containerWidth * 0.44 + "px";
+            playerElement.style.top = containerHeight * 0.8 + "px";
+            break;
+          case "1st Base":
+            playerElement.style.left = containerWidth * 0.6 + "px";
+            playerElement.style.top = containerHeight * 0.55 + "px";
+            break;
+          case "2nd Base":
+            playerElement.style.left = containerWidth * 0.56 + "px";
+            playerElement.style.top = containerHeight * 0.35 + "px";
+            break;
+          case "3rd Base":
+            playerElement.style.left = containerWidth * 0.3 + "px";
+            playerElement.style.top = containerHeight * 0.55 + "px";
+            break;
+          case "Shortstop":
+            playerElement.style.left = containerWidth * 0.34 + "px";
+            playerElement.style.top = containerHeight * 0.35 + "px";
+            break;
+          case "Left Field":
+            playerElement.style.left = containerWidth * 0.25 + "px";
+            playerElement.style.top = containerHeight * 0.25 + "px";
+            break;
+          case "Center Field":
+            playerElement.style.left = containerWidth * 0.44 + "px";
+            playerElement.style.top = containerHeight * 0.2 + "px";
+            break;
+          case "Right Field":
+            playerElement.style.left = containerWidth * 0.6 + "px";
+            playerElement.style.top = containerHeight * 0.25 + "px";
+            break;
+          case "Bench 1":
+            playerElement.style.left = containerWidth * 0.7 + "px";
+            playerElement.style.top = containerHeight * 0.7 + "px";
+            break;
+          case "Bench 2":
+            playerElement.style.left = containerWidth * 0.7 + "px";
+            playerElement.style.top = containerHeight * 0.75 + "px";
+            break;
+          default:
+            break;
+        }
 
     // Function to reset the lineup
     function resetLineup() {
