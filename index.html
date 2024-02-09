@@ -255,7 +255,7 @@ function createDiamondContainer() {
             break;
           case "2nd Base":
             playerElement.style.left = containerWidth * 0.56 + "px";
-            playerElement.style.top = containerHeight * 0.47 + "px";
+            playerElement.style.top = containerHeight * 0.35 + "px";
             break;
           case "3rd Base":
             playerElement.style.left = containerWidth * 0.3 + "px";
@@ -263,13 +263,11 @@ function createDiamondContainer() {
             break;
           case "Shortstop":
             playerElement.style.left = containerWidth * 0.34 + "px";
-            playerElement.style.top = containerHeight * 0.47 + "px";
-            playerElement.style.textAlign = "center";
+            playerElement.style.top = containerHeight * 0.35 + "px";
             break;
           case "Left Field":
             playerElement.style.left = containerWidth * 0.25 + "px";
             playerElement.style.top = containerHeight * 0.25 + "px";
-            playerElement.style.textAlign = "center";
             break;
           case "Center Field":
             playerElement.style.left = containerWidth * 0.44 + "px";
@@ -290,6 +288,10 @@ function createDiamondContainer() {
           default:
             break;
         }
+
+            // Add a white box around the player names
+        playerElement.style.border = "2px solid white";
+        playerElement.style.padding = "5px"; // Optional: Add padding for better visual appearance
 
         diamondContainer.appendChild(playerElement);
       });
