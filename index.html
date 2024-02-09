@@ -1,4 +1,4 @@
-<!-- VERSION 13 -->
+<!-- VERSION 14 -->
 <!DOCTYPE html>
 <html>
 
@@ -142,11 +142,6 @@
       var baseballDiamond = document.createElement("div");
       baseballDiamond.id = "baseballDiamond";
       baseballDiamondContainer.appendChild(baseballDiamond);
-
-      // Add the field diagram image
-      var fieldImage = document.createElement("img");
-      fieldImage.src = "https://static.vecteezy.com/system/resources/previews/001/198/300/large_2x/baseball-diamond-png.png";
-      baseballDiamond.appendChild(fieldImage);
     }
 
     // Function to show the position assignment popup
@@ -289,7 +284,8 @@
           default:
             break;
         }
-        baseballDiamondContainer.appendChild(playerElement);
+
+        document.getElementById("baseballDiamond").appendChild(playerElement);
       });
     }
 
