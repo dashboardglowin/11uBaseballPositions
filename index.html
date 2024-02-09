@@ -52,10 +52,11 @@
 
     /* New style for the baseball diamond container */
     #diamondContainer {
-      font-family: monospace; /* Use monospace font for better alignment */
-      white-space: pre; /* Preserve whitespaces for better formatting */
-      margin-top: 20px; /* Adjust the margin as needed */
+      font-family: monospace;
+      white-space: pre;
+      margin-top: 20px;
       position: relative;
+      height: 40vh; /* Adjust this value as needed */
     }
 
     /* New style for player names on the baseball diamond */
@@ -125,13 +126,13 @@
       }
     }
 
-// Function to create the diamond container
-function createDiamondContainer() {
-  var diamondContainer = document.createElement("div");
-  diamondContainer.id = "diamondContainer";
+    // Function to create the diamond container
+    function createDiamondContainer() {
+      var diamondContainer = document.createElement("div");
+      diamondContainer.id = "diamondContainer";
 
-  // Adjust the height of the container as needed (in pixels)
-  diamondContainer.style.height = "400px"; // Change this value to your desired height
+      // Adjust the height of the container as needed (in pixels)
+      diamondContainer.style.height = "400px"; // Change this value to your desired height
       document.body.appendChild(diamondContainer);
     }
 
@@ -193,7 +194,7 @@ function createDiamondContainer() {
       var positionList = document.getElementById("positionList");
       var positionItems = positionList.getElementsByTagName("li");
 
-      for (var i = 0; i < positionItems.length; i++) {
+      for (var i = 0; positionItems.length; i++) {
         if (positionItems[i].innerHTML.includes(position)) {
           positionItems[i].innerHTML = positions[i] + ": " + playerName + " ";
 
