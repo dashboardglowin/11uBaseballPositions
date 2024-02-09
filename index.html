@@ -227,12 +227,50 @@
         var containerHeight = diamondContainer.offsetHeight;
 
         switch (player.position) {
-          // Adjust these calculations based on your desired layout within diamondContainer
           case "Pitcher":
             playerElement.style.left = containerWidth * 0.5 + "px";
-            playerElement.style.top = containerHeight * 0.7 + "px";
+            playerElement.style.top = containerHeight * 0.2 + "px";
             break;
-          // ... (similar adjustments for other positions)
+          case "Catcher":
+            playerElement.style.left = containerWidth * 0.5 + "px";
+            playerElement.style.top = containerHeight * 0.8 + "px";
+            break;
+          case "1st Base":
+            playerElement.style.left = containerWidth * 0.8 + "px";
+            playerElement.style.top = containerHeight * 0.5 + "px";
+            break;
+          case "2nd Base":
+            playerElement.style.left = containerWidth * 0.6 + "px";
+            playerElement.style.top = containerHeight * 0.3 + "px";
+            break;
+          case "3rd Base":
+            playerElement.style.left = containerWidth * 0.2 + "px";
+            playerElement.style.top = containerHeight * 0.5 + "px";
+            break;
+          case "Shortstop":
+            playerElement.style.left = containerWidth * 0.4 + "px";
+            playerElement.style.top = containerHeight * 0.3 + "px";
+            break;
+          case "Left Field":
+            playerElement.style.left = containerWidth * 0.1 + "px";
+            playerElement.style.top = containerHeight * 0.4 + "px";
+            break;
+          case "Center Field":
+            playerElement.style.left = containerWidth * 0.5 + "px";
+            playerElement.style.top = containerHeight * 0.15 + "px";
+            break;
+          case "Right Field":
+            playerElement.style.left = containerWidth * 0.9 + "px";
+            playerElement.style.top = containerHeight * 0.4 + "px";
+            break;
+          case "Bench 1":
+            playerElement.style.left = containerWidth * 0.85 + "px";
+            playerElement.style.top = containerHeight * 0.8 + "px";
+            break;
+          case "Bench 2":
+            playerElement.style.left = containerWidth * 0.85 + "px";
+            playerElement.style.top = containerHeight * 0.9 + "px";
+            break;
           default:
             break;
         }
