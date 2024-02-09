@@ -1,4 +1,4 @@
-<!-- VERSION 14 -->
+<!-- VERSION 15 -->
 <!DOCTYPE html>
 <html>
 
@@ -61,6 +61,7 @@
     #baseballDiamond {
       font-family: monospace; /* Use monospace font for better alignment */
       white-space: pre; /* Preserve whitespaces for better formatting */
+      position: relative;
     }
 
     /* New style for player names on the baseball diamond */
@@ -95,6 +96,14 @@
 
       // Create position list
       createPositionList();
+
+      // Create a container for the lineup card and field diagram
+      var baseballDiamondContainer = document.createElement("div");
+      baseballDiamondContainer.id = "baseballDiamondContainer";
+      document.body.appendChild(baseballDiamondContainer);
+
+      // Create the baseball diamond
+      createBaseballDiamond();
     }
 
     // Function to create a player button
@@ -125,14 +134,6 @@
         listItem.innerHTML = positions[i] + ": ";
         list.appendChild(listItem);
       }
-
-      // Create a container for the lineup card and field diagram
-      var baseballDiamondContainer = document.createElement("div");
-      baseballDiamondContainer.id = "baseballDiamondContainer";
-      document.body.appendChild(baseballDiamondContainer);
-
-      // Create the baseball diamond
-      createBaseballDiamond();
     }
 
     // Function to create the baseball diamond
@@ -158,6 +159,10 @@
       var popupContainer = document.createElement("div");
       popupContainer.id = "popupContainer";
 
+      // Add the selected player to the position list
+      var positionList = document.getElementById("positionList");
+      var positionItems = positionList.getElementsByTagName("li");
+
       for (var i = 0; i < positions.length; i++) {
         var positionButton = document.createElement("button");
         positionButton.innerHTML = positions[i];
@@ -173,6 +178,11 @@
         }
 
         popupContainer.appendChild(positionButton);
+
+        // Add the selected player to the position list
+        if (positions[i] === "Bench 1" || positions[i] === "Bench 2") {
+          positionItems[i].innerHTML += playerName + " ";
+        }
       }
 
       // Position the popup container between the player boxes and the lineup card
@@ -232,7 +242,7 @@
       // Add player names to the baseball diamond
       selectedPlayers.forEach(function (player) {
         var playerElement = document.createElement("div");
-        playerElement.innerHTML = player.playerName + "<br>" + player.position;
+        playerElement.innerHTML = player.playerName;
         playerElement.classList.add("player-name");
 
         // Position the player name based on the position on the diamond
