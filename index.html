@@ -1,4 +1,4 @@
-<!-- VERSION 14 -->
+<!-- VERSION 13 -->
 <!DOCTYPE html>
 <html>
 
@@ -51,12 +51,16 @@
       max-width: 200px; /* Adjust the maximum width as needed */
     }
 
+    /* New style for the baseball diamond container */
+    #baseballDiamondContainer {
+      position: relative;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
     /* New style for the baseball diamond */
     #baseballDiamond {
       font-family: monospace; /* Use monospace font for better alignment */
       white-space: pre; /* Preserve whitespaces for better formatting */
-      margin-top: 20px; /* Adjust the margin as needed */
-      position: relative;
     }
 
     /* New style for player names on the baseball diamond */
@@ -121,6 +125,28 @@
         listItem.innerHTML = positions[i] + ": ";
         list.appendChild(listItem);
       }
+
+      // Create a container for the lineup card and field diagram
+      var baseballDiamondContainer = document.createElement("div");
+      baseballDiamondContainer.id = "baseballDiamondContainer";
+      document.body.appendChild(baseballDiamondContainer);
+
+      // Create the baseball diamond
+      createBaseballDiamond();
+    }
+
+    // Function to create the baseball diamond
+    function createBaseballDiamond() {
+      // Create a container for the baseball diamond
+      var baseballDiamondContainer = document.getElementById("baseballDiamondContainer");
+      var baseballDiamond = document.createElement("div");
+      baseballDiamond.id = "baseballDiamond";
+      baseballDiamondContainer.appendChild(baseballDiamond);
+
+      // Add the field diagram image
+      var fieldImage = document.createElement("img");
+      fieldImage.src = "https://static.vecteezy.com/system/resources/previews/001/198/300/large_2x/baseball-diamond-png.png";
+      baseballDiamond.appendChild(fieldImage);
     }
 
     // Function to show the position assignment popup
@@ -263,8 +289,7 @@
           default:
             break;
         }
-
-        document.body.appendChild(playerElement);
+        baseballDiamondContainer.appendChild(playerElement);
       });
     }
 
@@ -284,6 +309,17 @@
 
     // Create the lineup when the page loads
     window.onload = createLineup;
+
+    // Update the baseball diamond position on window resize
+    window.onresize = function () {
+      updateBaseballDiamondPosition();
+    };
+
+    // Function to update baseball diamond position
+    function updateBaseballDiamondPosition() {
+      var lineupCardHeight = document.getElementById("lineupCard").offsetHeight;
+      document.getElementById("baseballDiamondContainer").style.top = lineupCardHeight + 30 + "px";
+    }
   </script>
 </body>
 
