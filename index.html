@@ -56,6 +56,9 @@
       white-space: pre; /* Preserve whitespaces for better formatting */
       margin-top: 20px; /* Adjust the margin as needed */
       position: relative;
+      width: 70%; /* Adjust the width as needed */
+      height: 70vh; /* Adjust the height as needed */
+      max-width: 600px; /* Set a maximum width if needed */
     }
 
     /* New style for player names on the baseball diamond */
@@ -125,13 +128,11 @@
       }
     }
 
-// Function to create the diamond container
-function createDiamondContainer() {
-  var diamondContainer = document.createElement("div");
-  diamondContainer.id = "diamondContainer";
+    // Function to create the diamond container
+    function createDiamondContainer() {
+      var diamondContainer = document.createElement("div");
+      diamondContainer.id = "diamondContainer";
 
-  // Adjust the height of the container as needed (in pixels)
-  diamondContainer.style.height = "400px"; // Change this value to your desired height
       document.body.appendChild(diamondContainer);
     }
 
@@ -193,7 +194,7 @@ function createDiamondContainer() {
       var positionList = document.getElementById("positionList");
       var positionItems = positionList.getElementsByTagName("li");
 
-      for (var i = 0; i < positionItems.length; i++) {
+      for (var i = 0; positionItems[i]; i++) {
         if (positionItems[i].innerHTML.includes(position)) {
           positionItems[i].innerHTML = positions[i] + ": " + playerName + " ";
 
