@@ -125,10 +125,13 @@
       }
     }
 
-    // Function to create the diamond container
-    function createDiamondContainer() {
-      var diamondContainer = document.createElement("div");
-      diamondContainer.id = "diamondContainer";
+// Function to create the diamond container
+function createDiamondContainer() {
+  var diamondContainer = document.createElement("div");
+  diamondContainer.id = "diamondContainer";
+
+  // Adjust the height of the container as needed (in pixels)
+  diamondContainer.style.height = "400px"; // Change this value to your desired height
       document.body.appendChild(diamondContainer);
     }
 
