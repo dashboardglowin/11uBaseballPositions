@@ -1,4 +1,4 @@
-<!-- VERSION 15 -->
+<!-- VERSION 14 -->
 <!DOCTYPE html>
 <html>
 
@@ -51,16 +51,11 @@
       max-width: 200px; /* Adjust the maximum width as needed */
     }
 
-    /* New style for the baseball diamond container */
-    #baseballDiamondContainer {
-      position: relative;
-      margin-top: 20px; /* Adjust the margin as needed */
-    }
-
     /* New style for the baseball diamond */
     #baseballDiamond {
       font-family: monospace; /* Use monospace font for better alignment */
       white-space: pre; /* Preserve whitespaces for better formatting */
+      margin-top: 20px; /* Adjust the margin as needed */
       position: relative;
     }
 
@@ -96,14 +91,6 @@
 
       // Create position list
       createPositionList();
-
-      // Create a container for the lineup card and field diagram
-      var baseballDiamondContainer = document.createElement("div");
-      baseballDiamondContainer.id = "baseballDiamondContainer";
-      document.body.appendChild(baseballDiamondContainer);
-
-      // Create the baseball diamond
-      createBaseballDiamond();
     }
 
     // Function to create a player button
@@ -136,15 +123,6 @@
       }
     }
 
-    // Function to create the baseball diamond
-    function createBaseballDiamond() {
-      // Create a container for the baseball diamond
-      var baseballDiamondContainer = document.getElementById("baseballDiamondContainer");
-      var baseballDiamond = document.createElement("div");
-      baseballDiamond.id = "baseballDiamond";
-      baseballDiamondContainer.appendChild(baseballDiamond);
-    }
-
     // Function to show the position assignment popup
     function showPositionPopup(playerName, playerButton) {
       // Close any existing popups
@@ -158,10 +136,6 @@
       // Create a container for the popup choices
       var popupContainer = document.createElement("div");
       popupContainer.id = "popupContainer";
-
-      // Add the selected player to the position list
-      var positionList = document.getElementById("positionList");
-      var positionItems = positionList.getElementsByTagName("li");
 
       for (var i = 0; i < positions.length; i++) {
         var positionButton = document.createElement("button");
@@ -178,11 +152,6 @@
         }
 
         popupContainer.appendChild(positionButton);
-
-        // Add the selected player to the position list
-        if (positions[i] === "Bench 1" || positions[i] === "Bench 2") {
-          positionItems[i].innerHTML += playerName + " ";
-        }
       }
 
       // Position the popup container between the player boxes and the lineup card
@@ -242,7 +211,7 @@
       // Add player names to the baseball diamond
       selectedPlayers.forEach(function (player) {
         var playerElement = document.createElement("div");
-        playerElement.innerHTML = player.playerName;
+        playerElement.innerHTML = player.playerName + "<br>" + player.position;
         playerElement.classList.add("player-name");
 
         // Position the player name based on the position on the diamond
@@ -295,7 +264,7 @@
             break;
         }
 
-        document.getElementById("baseballDiamond").appendChild(playerElement);
+        document.body.appendChild(playerElement);
       });
     }
 
@@ -315,17 +284,6 @@
 
     // Create the lineup when the page loads
     window.onload = createLineup;
-
-    // Update the baseball diamond position on window resize
-    window.onresize = function () {
-      updateBaseballDiamondPosition();
-    };
-
-    // Function to update baseball diamond position
-    function updateBaseballDiamondPosition() {
-      var lineupCardHeight = document.getElementById("lineupCard").offsetHeight;
-      document.getElementById("baseballDiamondContainer").style.top = lineupCardHeight + 30 + "px";
-    }
   </script>
 </body>
 
