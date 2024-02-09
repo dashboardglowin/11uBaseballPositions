@@ -236,9 +236,9 @@ function createDiamondContainer() {
         playerElement.innerHTML = player.playerName;
         playerElement.classList.add("player-name");
 
-// Center the text horizontally within each position
-playerElement.style.left = "50%";
-playerElement.style.transform = "translateX(-50%)";
+        // Calculate position percentages based on diamondContainer dimensions
+        var containerWidth = diamondContainer.offsetWidth;
+        var containerHeight = diamondContainer.offsetHeight;
 
         switch (player.position) {
           case "Pitcher":
